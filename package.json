@@ -7,7 +7,6 @@
     "start": "npm run start:server",
     "start:server": "node ./dist/src/server.js",
     "start:crawler": "node ./dist/src/crawler/lalala.js",
-
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall1": "npm run build",
@@ -24,6 +23,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "googleapis": "^76.0.0",
     "morgan": "^1.10.0",
     "node-schedule": "^2.0.0"
   },

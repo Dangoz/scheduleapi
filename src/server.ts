@@ -1,12 +1,9 @@
-import express from "express";
+import App from "./app";
 
-const app = express();
+require("dotenv").config();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const server = new App([
 
-app.listen(3000, () => {
-  console.log(`App listening on the port 3000`);
-})
+]);
 
-require("./crawler/lalala")();
+server.start();
