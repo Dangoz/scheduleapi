@@ -12,12 +12,12 @@ class App {
     this.initializeControllers(controllers);
 
     // initialize crawler
-    require("./crawler/lalala")();
+    require("./crawler/crawler")();
   }
 
   public start() {
     this._app.listen(this._port, () => {
-      console.log(`App listening on the port ${this._port}`);
+      console.log(`schedule-api listening on the port ${this._port}`);
     });
   }
 

@@ -2,10 +2,56 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+}
+
+model Persona {
+  id      String  @id
+  name    String
+  lore    String  @default("")
+  org     String
+  suborg  String?
+  twitter String
+
+  channel Channel[]
+
+  @@map(name: "persona")
+}
+
+model Channel {
+  id              String   @id
+  name            String
+  description     String
+  platform        String
+  photo           String
+  banner          String
+  publishedAt     DateTime
+  updatedAt       DateTime @updatedAt
+  subscriberCount Int
+  viewCount       Int
+  videoCount      Int
+  videos          Video[]
+  personaId       String
+  Persona         Persona  @relation(fields: [personaId], references: [id])
+
+  @@map(name: "channel")
+}
+
+model Video {
+  id          String   @id
+  title       String
+  status      String
+  publishedAt DateTime
+  scheduledAt DateTime
+  availableAt DateTime
+  channelId   String
+  Channel     Channel  @relation(fields: [channelId], references: [id])
+
+  @@map(name: "video")
 }
