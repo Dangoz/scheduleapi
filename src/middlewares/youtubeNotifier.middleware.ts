@@ -5,7 +5,7 @@ module.exports = (app) => {
   console.log('initializing youtube notifier')
 
   const notifier = new YouTubeNotifier({
-    hubCallback: 'https://vtb-schedule-api.herokuapp.com/youtube-feeds',
+    hubCallback: 'https://vtb-schedule-api.herokuapp.com/feeds-youtube',
     secret: 'pipi..pipipipipi..pi',
     middleware: true
   });
@@ -34,5 +34,5 @@ module.exports = (app) => {
 
   notifier.subscribe('UCZpMTTPDp2EAev6nb68Onjg');
 
-  app.use('/youtube-feeds', notifier.listener());
+  app.use('/feeds-youtube', notifier.listener());
 }

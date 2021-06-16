@@ -10,7 +10,7 @@ class FeedController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}/youtube`, this.youtubeFeeds)
+    this.router.post(`${this.path}-youtube`, this.youtubeFeeds)
   }
 
   private youtubeFeeds = async (req: express.Request, res: express.Response) => {
