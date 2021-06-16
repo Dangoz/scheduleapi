@@ -6,7 +6,7 @@ module.exports = (app) => {
 
   const notifier = new YouTubeNotifier({
     hubCallback: 'https://vtb-schedule-api.herokuapp.com/feeds-youtube',
-    secret: 'pipi..pipipipipi..pi',
+    secret: 'pipipa',
     middleware: true
   });
 
@@ -33,23 +33,8 @@ module.exports = (app) => {
     updated: "2021-06-16T20:49:47.122Z"
   }
 
-  notifier.subscribe('UCZpMTTPDp2EAev6nb68Onjg');
+  notifier.subscribe(['UCZpMTTPDp2EAev6nb68Onjg']);
 
   app.use('/feeds-youtube', notifier.listener());
 
-
-  const notifier2 = new YouTubeNotifier({
-    hubCallback: 'https://vtb-schedule-api.herokuapp.com/youtube-feeds',
-    secret: 'pipi..pipipipipi..pi',
-    middleware: true
-  });
-  notifier2.unsubscribe('UCZpMTTPDp2EAev6nb68Onjg');
-  app.use('/youtube-feeds', notifier2.listener());
-  const notifier3 = new YouTubeNotifier({
-    hubCallback: 'https://vtb-schedule-api.herokuapp.com/youtube-notification',
-    secret: 'pipi..pipipipipi..pi',
-    middleware: true
-  });
-  notifier3.unsubscribe('UCZpMTTPDp2EAev6nb68Onjg');
-  app.use('/youtube-notification', notifier3.listener());
 }
