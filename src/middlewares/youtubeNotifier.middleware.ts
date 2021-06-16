@@ -43,12 +43,12 @@ module.exports = (app) => {
     middleware: true
   });
   notifier2.unsubscribe('UCZpMTTPDp2EAev6nb68Onjg');
-  app.use('/youtube-feeds', notifier.listener());
+  app.use('/youtube-feeds', notifier2.listener());
   const notifier3 = new YouTubeNotifier({
     hubCallback: 'https://vtb-schedule-api.herokuapp.com/youtube-notification',
     secret: 'pipi..pipipipipi..pi',
     middleware: true
   });
   notifier3.unsubscribe('UCZpMTTPDp2EAev6nb68Onjg');
-  app.use('/youtube-notification', notifier.listener());
+  app.use('/youtube-notification', notifier3.listener());
 }
