@@ -14,6 +14,7 @@ generator client {
 model Persona {
   id      String  @id
   name    String
+  nameJP  String?
   lore    String  @default("")
   org     String
   suborg  String?
@@ -26,6 +27,7 @@ model Persona {
 
 model Channel {
   id              String   @id
+  uploadId        String
   name            String
   description     String
   platform        String
@@ -44,14 +46,15 @@ model Channel {
 }
 
 model Video {
-  id          String   @id
-  title       String
-  status      String
-  publishedAt DateTime
-  scheduledAt DateTime
-  availableAt DateTime
-  channelId   String
-  Channel     Channel  @relation(fields: [channelId], references: [id])
+  id            String   @id
+  title         String
+  status        String
+  liveViewCount Int
+  publishedAt   DateTime
+  scheduledAt   DateTime
+  availableAt   DateTime
+  channelId     String
+  Channel       Channel  @relation(fields: [channelId], references: [id])
 
   @@map(name: "video")
 }

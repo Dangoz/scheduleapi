@@ -1,0 +1,116 @@
+{
+  "members": [
+    {
+      "id": "rinkouashelia",
+      "name": "Rinkou Ashelia",
+      "nameJP": "鈴香アシェリア",
+      "org": "phase-connect",
+      "suborg": "generation 1",
+      "twitter": "rinkouashelia",
+      "channel": {
+        "id": "UCg7sW-h1PUowdiR5K4HlBew",
+        "name": "",
+        "description": "",
+        "platform": "youtube",
+        "photo": "",
+        "banner": ""
+      }
+    },
+    {
+      "id": "pipkinpippa",
+      "name": "Pipkin Pippa",
+      "nameJP": "ピップキン ピッパ",
+      "org": "phase-connect",
+      "suborg": "generation 1",
+      "twitter": "pipkinpippa",
+      "channel": {
+        "id": "UCJ46YTYBQVXsfsp8-HryoUA",
+        "name": "",
+        "description": "",
+        "platform": "youtube",
+        "photo": "",
+        "banner": ""
+      }
+    },
+    {
+      "id": "tenmamaemi",
+      "name": "Tenma Maemi",
+      "nameJP": "マエミ 天満",
+      "org": "phase-connect",
+      "suborg": "generation 1",
+      "twitter": "tenmamaemi",
+      "channel": {
+        "id": "UC3K7pmiHsNSx1y0tdx2bbCw",
+        "name": "",
+        "description": "",
+        "platform": "youtube",
+        "photo": "",
+        "banner": ""
+      }
+    },
+    {
+      "id": "fujikurauruka",
+      "name": "Fujikura Uruka",
+      "nameJP": "藤倉ウルカ",
+      "org": "phase-connect",
+      "suborg": "generation 1",
+      "twitter": "fujikurauruka",
+      "channel": {
+        "id": "UCjXJYPsKxoJyc-1RPB6dSyw",
+        "name": "",
+        "description": "",
+        "platform": "youtube",
+        "photo": "",
+        "banner": ""
+      }
+    },
+    {
+      "id": "hakushikaiori",
+      "name": "Hakushika Iori",
+      "nameJP": "白鹿いおり",
+      "org": "phase-connect",
+      "suborg": "generation 1",
+      "twitter": "hakushikaiori",
+      "channel": {
+        "id": "UCN5bD1YYapThOeadG7YkBOA",
+        "name": "",
+        "description": "",
+        "platform": "youtube",
+        "photo": "",
+        "banner": ""
+      }
+    },
+    {
+      "id": "shisuimichiru",
+      "name": "Shisui Michiru",
+      "nameJP": "紫翠みちる",
+      "org": "phase-connect",
+      "suborg": "generation 1",
+      "twitter": "shisuimichiru",
+      "channel": {
+        "id": "UC1cExET9xoWSO9iSnRsW_1Q",
+        "name": "",
+        "description": "",
+        "platform": "youtube",
+        "photo": "",
+        "banner": ""
+      }
+    },
+    {
+      "id": "utatanenasa",
+      "name": "Utatane Nasa",
+      "nameJP": "転寝ナサ",
+      "org": "phase-connect",
+      "suborg": "generation 1",
+      "twitter": "utatanenasa",
+      "channel": {
+        "id": "UCB7sSUNwh_dXE7ZL3DsGDpw",
+        "name": "",
+        "description": "",
+        "platform": "youtube",
+        "photo": "",
+        "banner": ""
+      }
+    }
+  ]
+}

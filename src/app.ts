@@ -23,6 +23,7 @@ class App {
 
   private initializeMiddlewares() {
     require("./middlewares/express.middleware")(this._app);
+    require("./middlewares/youtubeNotifier.middleware")(this._app);
   }
 
   private initializeControllers(controllers: IController[]) {

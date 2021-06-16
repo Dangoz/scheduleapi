@@ -11,9 +11,4 @@ module.exports = () => {
   schedule.scheduleJob('*/1 * * * *', () => {
     console.log("RUAAAaa! " + new Date().toString())
   });
-
-
-
-
-
 }
