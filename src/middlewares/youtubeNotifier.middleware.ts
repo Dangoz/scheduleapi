@@ -11,6 +11,7 @@ module.exports = (app) => {
   });
 
   notifier.on('notified', data => {
+    console.log("NOTIFIED~~COMING~ IN")
     console.log('New Video: ', JSON.stringify(data, null, 2));
     console.log(
       `${data.channel.name} just uploaded a new video titled: ${data.video.title}`
