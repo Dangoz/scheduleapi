@@ -15,6 +15,7 @@ class FeedController implements IController {
 
   private youtubeFeeds = async (req: express.Request, res: express.Response) => {
     const data = req.body;
+    console.log('RECEIVED!@@!~');
     console.log('feed data', JSON.stringify(data, null, 2))
   }
 }
