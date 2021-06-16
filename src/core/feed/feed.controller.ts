@@ -18,3 +18,5 @@ class FeedController implements IController {
     console.log('feed data', JSON.stringify(data, null, 2))
   }
 }
+
+export default FeedController;
