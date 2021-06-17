@@ -10,7 +10,19 @@ module.exports = (app) => {
     middleware: true
   });
 
-  notifier.on('notified', data => {
+  app.use('/feeds-youtube', notifier.listener());
+
+  notifier.on('subscribe', data => {
+    console.log('Subscribed');
+    console.log(data);
+  });
+
+  notifier.on('denied', data => {
+    console.log('Denied');
+    console.log(data);
+  });
+
+  notifier.on('notified', async (data) => {
     console.log("NOTIFIED~~COMING~ IN")
     console.log('New Video: ', JSON.stringify(data, null, 2));
     console.log(
@@ -34,7 +46,4 @@ module.exports = (app) => {
   }
 
   notifier.subscribe(['UCZpMTTPDp2EAev6nb68Onjg']);
-
-  app.use('/feeds-youtube', notifier.listener());
-
 }
