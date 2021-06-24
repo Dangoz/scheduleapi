@@ -5,14 +5,14 @@ class App {
   private _app: express.Application;
   private readonly _port: number | string = process.env.PORT || 5000;
 
-  constructor(controllers: IController[]) {
+  constructor(public controllers: IController[]) {
     this._app = express();
 
     this.initializeMiddlewares();
-    this.initializeControllers(controllers);
+    this.initializeControllers();
 
     // initialize crawler
-    require("./crawler/crawler")();
+    require("./crawler/scheduler")();
   }
 
   public start() {
@@ -23,10 +23,10 @@ class App {
 
   private initializeMiddlewares() {
     require("./middlewares/express.middleware")(this._app);
-    require("./middlewares/youtubeNotifier.middleware")(this._app);
+    // require("./middlewares/youtubeNotifier.middleware")(this._app);
   }
 
-  private initializeControllers(controllers: IController[]) {
+  private initializeControllers() {
 
     // redirect all http requests to https
     this._app.all('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -36,7 +36,7 @@ class App {
         next();
       }
     });
-
+    this.
     // pass in each router from controllers
     controllers.forEach(controller => {
       this._app.use('/', controller.router);

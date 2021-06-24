@@ -1,5 +1,5 @@
 import App from "./app";
-import FeedController from "./core/feed/feed.controller";
+import FeedController from "./core/feed/controllers/feed.controller";
 
 require("dotenv").config();
 

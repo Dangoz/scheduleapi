@@ -1,4 +1,4 @@
-import IController from "../../interfaces/controller.interface";
+import IController from "../../../interfaces/controller.interface";
 import express from "express";
 
 class FeedController implements IController {
@@ -10,7 +10,7 @@ class FeedController implements IController {
   }
 
   private initializeRoutes() {
-    // this.router.post(`${this.path}-youtube`, this.youtubeFeeds)
+    
   }
 
 }

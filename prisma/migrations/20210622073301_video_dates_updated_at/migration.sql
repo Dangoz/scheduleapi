@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "video" ALTER COLUMN "publishedAt" DROP NOT NULL,
+ALTER COLUMN "scheduledAt" DROP NOT NULL,
+ALTER COLUMN "availableAt" DROP NOT NULL;

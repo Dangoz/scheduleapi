@@ -1,35 +1,14 @@
 import YouTubeNotifier from "youtube-notification";
+import YoutubeNotifier from "../core/feed/services/youtubeNotifier.service";
 
 module.exports = (app) => {
+  
+  const subscription = ['UCZpMTTPDp2EAev6nb68Onjg', 'UCkVWy3Y2aBSi8NfZ7oIrfGg', 'UCB7sSUNwh_dXE7ZL3DsGDpw'];
+  const notifier: YoutubeNotifier = new YoutubeNotifier(subscription)
 
-  console.log('initializing youtube notifier')
+  app.use('/feeds-youtube', notifier.start());
 
-  const notifier = new YouTubeNotifier({
-    hubCallback: 'https://vtb-schedule-api.herokuapp.com/feeds-youtube',
-    secret: 'pipipa',
-    middleware: true
-  });
-
-  app.use('/feeds-youtube', notifier.listener());
-
-  notifier.on('subscribe', data => {
-    console.log('Subscribed');
-    console.log(data);
-  });
-
-  notifier.on('denied', data => {
-    console.log('Denied');
-    console.log(data);
-  });
-
-  notifier.on('notified', async (data) => {
-    console.log("NOTIFIED~~COMING~ IN")
-    console.log('New Video: ', JSON.stringify(data, null, 2));
-    console.log(
-      `${data.channel.name} just uploaded a new video titled: ${data.video.title}`
-    );
-  });
-
+  // sample json structure from 'notified' event
   const data = {
     video: {
       id: "AmadfVM-bR4",
@@ -44,6 +23,4 @@ module.exports = (app) => {
     published: "2021-06-16T20:49:23.000Z",
     updated: "2021-06-16T20:49:47.122Z"
   }
-
-  notifier.subscribe(['UCZpMTTPDp2EAev6nb68Onjg']);
 }

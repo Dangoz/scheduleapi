@@ -46,15 +46,17 @@ model Channel {
 }
 
 model Video {
-  id            String   @id
+  id            String    @id
   title         String
-  status        String
-  liveViewCount Int
-  publishedAt   DateTime
-  scheduledAt   DateTime
-  availableAt   DateTime
+  thumbnail     String?
+  status        String? // missing, complete, upcoming, live
+  liveViewCount Int?
+  publishedAt   DateTime?
+  scheduledAt   DateTime?
+  availableAt   DateTime?
   channelId     String
-  Channel       Channel  @relation(fields: [channelId], references: [id])
+  Channel       Channel   @relation(fields: [channelId], references: [id])
+  updatedAt     DateTime  @updatedAt
 
   @@map(name: "video")
 }
