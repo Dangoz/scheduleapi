@@ -11,7 +11,6 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
   let updateList = await videodb.getUpcoming(limit);
   if (!updateList.length) return;
   const targetIds = updateList.map(video => video.id);
-  console.log('upcomg-videos', targetIds);
 
   // get video data, sync with database
   const videoData = await youtubeAPI.getVideos(targetIds);
