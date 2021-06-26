@@ -35,7 +35,7 @@ module.exports = async (channeldb: ChannelModel, videodb: VideoModel) => {
 
       // sync channelVideoResult with database
       const syncedVideos = results.map(result => videodb.syncChannelVideo(result));
-      await Promise.all(syncedVideos).then(videos => console.log('synced', videos.length));
+      await Promise.all(syncedVideos).then(videos => console.log('recent-synced', videos.length));
     })
 
 

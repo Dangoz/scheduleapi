@@ -16,5 +16,18 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
   const videoData = await youtubeAPI.getVideos(targetIds);
   //  console.log('data', videoData);
   const syncedVideos = videoData.map(data => videodb.updateVideo(data));
-  console.log('synced', (await Promise.all(syncedVideos)).length)
+  console.log('live-synced', (await Promise.all(syncedVideos)).length);
+
+  // get ids of video data not returned
+  if (targetIds.length === videoData.length) return;
+  const videoDataIds = videoData.map(data => data.id);
+  const missingIds = targetIds.filter(targetId => videoDataIds.indexOf(targetId) === -1);
+
+  // check/crawl video ids again, then delete/update accordingly
+  const recheckData = await youtubeAPI.getVideos(missingIds);
+  const recheck = missingIds.map(missingId => {
+    const foundVideo = recheckData.find(data => data.id === missingId);
+    foundVideo ? videodb.updateVideo(foundVideo) : videodb.deleteVideo(missingId);
+  })
+  console.log('re-synced', (await Promise.all(recheck)).length);
 }
