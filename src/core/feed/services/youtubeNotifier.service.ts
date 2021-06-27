@@ -12,7 +12,7 @@ export default class YoutubeNotifier {
 
   constructor(subscription: string[]) {
     this.notifier = new youtubeNotification({
-      hubCallback: 'https://4fcd7b922b1a.ngrok.io/feeds-youtube',
+      hubCallback: process.env.YOUTUBE_NOTIFIER_CB,
       secret: 'anakaso2h',
       middleware: true
     });
@@ -23,6 +23,7 @@ export default class YoutubeNotifier {
 
   private initializeNotification() {
     this.notifier.on('subscribe', data => console.log(data));
+    this.notifier.on('unsubscribe', data => console.log('unsubscribe:', data));
 
     this.notifier.on('notified', async data => {
       console.log(`Create || Update - Youtube-Notification at id: ${data.video.id}`)
@@ -38,7 +39,7 @@ export default class YoutubeNotifier {
   }
 
   private initializeSubscription(subscription: string[]) {
-    this.notifier.subscribe(subscription);
+    this.notifier.unsubscribe(subscription);
   }
 
   public start() {
