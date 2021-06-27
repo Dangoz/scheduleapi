@@ -12,7 +12,7 @@ export default class YoutubeNotifier {
 
   constructor(subscription: string[]) {
     this.notifier = new youtubeNotification({
-      hubCallback: process.env.YOUTUBE_NOTIFIER_CB,
+      hubCallback: `${process.env.YOUTUBE_NOTIFIER_CB}/feeds-youtube`,
       secret: 'anakaso2h',
       middleware: true
     });
