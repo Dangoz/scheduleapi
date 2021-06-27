@@ -39,7 +39,7 @@ export default class YoutubeNotifier {
   }
 
   private initializeSubscription(subscription: string[]) {
-    this.notifier.unsubscribe(subscription);
+    this.notifier.subscribe(subscription);
   }
 
   public start() {
