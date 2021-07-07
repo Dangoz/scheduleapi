@@ -49,7 +49,7 @@ model Video {
   id            String    @id
   title         String
   thumbnail     String?
-  status        String? // missing, complete, upcoming, live
+  status        String? // complete, upcoming, live
   liveViewCount Int?
   publishedAt   DateTime?
   scheduledAt   DateTime?
