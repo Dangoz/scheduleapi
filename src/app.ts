@@ -36,9 +36,9 @@ class App {
         next();
       }
     });
-    this.
+
     // pass in each router from controllers
-    controllers.forEach(controller => {
+    this.controllers.forEach(controller => {
       this._app.use('/', controller.router);
     })
   }
