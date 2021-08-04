@@ -14,7 +14,7 @@ export async function paginate<T>(arr: T[], index: number): Promise<T[][]> {
 
 /**
  * remove duplicates from an array
- * Example; [1, 1, 2, 3, 3, 4, 5]
+ * Example; removeDuplicate([1, 1, 2, 3, 3, 4, 5])
  * output: [1, 2, 3, 4, 5]
  */
 export async function removeDuplicate<T>(arr: T[]): Promise<T[]> {
