@@ -27,7 +27,7 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
   const recheckData = await youtubeAPI.getVideos(missingIds);
   const recheck = missingIds.map(missingId => {
     const foundVideo = recheckData.find(data => data.id === missingId);
-    foundVideo ? videodb.updateVideo(foundVideo) : videodb.deleteVideo(missingId);
+    return foundVideo ? videodb.updateVideo(foundVideo) : videodb.deleteVideo(missingId);
   })
   console.log('re-synced', (await Promise.all(recheck)).length);
 }
