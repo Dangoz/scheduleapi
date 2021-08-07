@@ -1,5 +1,5 @@
 import express from "express";
-import IController from "./interfaces/controller.interface";
+import IController from "@/interfaces/controller.interface";
 
 class App {
   private _app: express.Application;

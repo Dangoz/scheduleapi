@@ -1,10 +1,10 @@
 /**
  * update 15 most recent videos of each channel through youtube-xml-feed
  */
-import { channelVideoResult } from "../../interfaces/crawler/streamingResults.interface";
+import { channelVideoResult } from "@/interfaces/crawler/streamingResults.interface";
 import axios from "axios";
-import ChannelModel from "../../model/channel.model";
-import VideoModel from "../../model/video.model";
+import ChannelModel from "@/model/channel.model";
+import VideoModel from "@/model/video.model";
 import { paginate } from "../helpers/util";
 
 module.exports = async (channeldb: ChannelModel, videodb: VideoModel) => {

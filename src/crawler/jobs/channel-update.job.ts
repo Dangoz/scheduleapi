@@ -2,7 +2,7 @@
  * Every 15mins, update channel data
  */
 import YoutubeAPI from "../spiders/youtubeAPI";
-import ChannelModel from "../../model/channel.model";
+import ChannelModel from "@/model/channel.model";
 
 module.exports = async (youtubeAPI: YoutubeAPI, channeldb: ChannelModel) => {
 

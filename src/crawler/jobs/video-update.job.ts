@@ -3,7 +3,7 @@
  * limit of 20 videos per run
  */
 import YoutubeAPI from "../spiders/youtubeAPI";
-import VideoModel from "../../model/video.model";
+import VideoModel from "@/model/video.model";
 import { removeDuplicate } from "../helpers/util";
 
 module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {

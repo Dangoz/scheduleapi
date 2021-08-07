@@ -4,8 +4,8 @@
  */
 import schedule from "node-schedule";
 import YoutubeAPI from "./spiders/youtubeAPI";
-import ChannelModel from "../model/channel.model";
-import VideoModel from "../model/video.model";
+import ChannelModel from "@/model/channel.model";
+import VideoModel from "@/model/video.model";
 
 module.exports = async () => {
 

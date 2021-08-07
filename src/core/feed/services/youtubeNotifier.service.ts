@@ -1,6 +1,6 @@
 import youtubeNotification from "youtube-notification";
-import VideoModel from "../../../model/video.model";
-import { channelVideoResult } from "../../../interfaces/crawler/streamingResults.interface";
+import VideoModel from "@/model/video.model";
+import { channelVideoResult } from "@/interfaces/crawler/streamingResults.interface";
 
 /**
  * wrapper class for youtube-notification package with

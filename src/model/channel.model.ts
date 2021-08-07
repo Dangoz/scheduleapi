@@ -1,6 +1,6 @@
 import prisma from "./prisma.client";
 import { Channel } from "@prisma/client";
-import { channelResult } from "../interfaces/crawler/streamingResults.interface";
+import { channelResult } from "@/interfaces/crawler/streamingResults.interface";
 
 export default class ChannelModel {
 

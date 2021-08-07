@@ -1,5 +1,5 @@
-import IStreamingPlatform from "../../interfaces/crawler/streamingPlatform.interface";
-import { channelResult, channelVideoResult, videoResult } from "../../interfaces/crawler/streamingResults.interface";
+import IStreamingPlatform from "@/interfaces/crawler/streamingPlatform.interface";
+import { channelResult, channelVideoResult, videoResult } from "@/interfaces/crawler/streamingResults.interface";
 import { google, youtube_v3 } from "googleapis";
 require('dotenv').config();
 

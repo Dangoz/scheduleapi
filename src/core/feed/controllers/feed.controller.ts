@@ -1,4 +1,4 @@
-import IController from "../../../interfaces/controller.interface";
+import IController from "@/interfaces/controller.interface";
 import express from "express";
 
 class FeedController implements IController {

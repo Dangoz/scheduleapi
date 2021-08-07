@@ -2,8 +2,8 @@
  * , update channel playlist videos
  */
 import YoutubeAPI from "../spiders/youtubeAPI";
-import ChannelModel from "../../model/channel.model";
-import VideoModel from "../../model/video.model";
+import ChannelModel from "@/model/channel.model";
+import VideoModel from "@/model/video.model";
 import { paginate } from "../helpers/util";
 
 module.exports = async (youtubeAPI: YoutubeAPI, channeldb: ChannelModel, videodb: VideoModel) => {

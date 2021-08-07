@@ -1,6 +1,6 @@
 import prisma from "./prisma.client";
 import { Video } from "@prisma/client";
-import { channelVideoResult, videoResult } from "../interfaces/crawler/streamingResults.interface";
+import { channelVideoResult, videoResult } from "@/interfaces/crawler/streamingResults.interface";
 import dayjs from "dayjs";
 
 export default class VideoModel {

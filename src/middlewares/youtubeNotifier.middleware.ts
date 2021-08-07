@@ -1,4 +1,3 @@
-import YouTubeNotifier from "youtube-notification";
 import YoutubeNotifier from "../core/feed/services/youtubeNotifier.service";
 import g1 from "../../prisma/seed/generation1.json";
 

@@ -2,7 +2,7 @@
  * update upcoming videos
  */
 import YoutubeAPI from "../spiders/youtubeAPI";
-import VideoModel from "../../model/video.model";
+import VideoModel from "@/model/video.model";
 
 module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
 
