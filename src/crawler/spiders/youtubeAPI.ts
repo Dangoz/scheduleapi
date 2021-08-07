@@ -21,7 +21,7 @@ export default class YoutubeAPI implements IStreamingPlatform {
       maxResults: 50
     });
     const results = response.data.items;
-    
+
     const channelData = results.map(data => {
       return {
         id: data.id,
@@ -58,7 +58,14 @@ export default class YoutubeAPI implements IStreamingPlatform {
       id: videoIds,
       maxResults: 50
     });
-    const results = response.data.items;
+
+    // filter edge case - offline video, having liveStreamingDetails without scheduledStartTime
+    const results = response.data.items.filter(item => {
+      if (item.liveStreamingDetails) {
+        if (!item.liveStreamingDetails.scheduledStartTime) return false;
+      } 
+      return true;
+    });
 
     const videoData = results.map(result => this.parseVideoData(result));
     return await Promise.all(videoData);
@@ -124,19 +131,3 @@ export default class YoutubeAPI implements IStreamingPlatform {
     return results.items;
   }
 }
-
-// const youtube = google.youtube({
-//   version: 'v3',
-//   auth: process.env.GOOGLE_API_KEY
-// });
-
-// youtube.videos.list({
-//   part: ['contentDetails', 'snippet', 'liveStreamingDetails', 'statistics'],
-//   id: [
-//     "60psUo4iC7w"
-//   ],
-//   maxResults: 50
-// }).then(response => {
-//   const results = response.data;
-//   console.log(JSON.stringify(results.items, null, 2))
-// });
