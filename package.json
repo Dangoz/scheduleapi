@@ -9,7 +9,7 @@
     "start:crawler": "node ./dist/src/crawler/lalala.js",
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "test": "ts-node-dev --respawn --transpile-only ./src/crawler/jobs/youtubeAPI.ts",
-    "postinstall1": "npm run build",
+    "postinstall": "npm run build",
     "build": "tsc",
     "studio": "npx prisma studio",
     "migrate": "npx prisma migrate dev"
