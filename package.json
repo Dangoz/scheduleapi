@@ -11,7 +11,8 @@
     "test": "ts-node-dev --respawn --transpile-only ./src/crawler/jobs/youtubeAPI.ts",
     "build": "tsc",
     "studio": "npx prisma studio",
-    "migrate": "npx prisma migrate dev"
+    "migrate": "npx prisma migrate dev",
+    "seed": "ts-node-dev --transpile-only ./prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

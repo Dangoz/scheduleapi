@@ -16,7 +16,8 @@ class ChannelController implements IController {
   }
 
   private getChannel = async (req: express.Request, res: express.Response) => {
-    res.status(200).json({ channel: "Ruaaaa!" })
+    const channels = await { wow: 'placeholder'};
+    res.status(200).json({ channels });
   }
 
 }

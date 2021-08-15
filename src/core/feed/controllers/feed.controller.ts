@@ -10,7 +10,11 @@ class FeedController implements IController {
   }
 
   private initializeRoutes() {
-    
+    this.router.get('/', this.greeting);
+  }
+
+  private greeting = async (req: express.Request, res: express.Response) => {
+    res.status(233).send('ฅ(=´♡ᆽ♡`=)ฅ. meow??? .ฅ(=´♡ᆽ♡`=)ฅ');
   }
 
 }

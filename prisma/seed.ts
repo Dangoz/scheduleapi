@@ -8,10 +8,10 @@ const members = generation1.members;
 async function main() {
   let memberList = [];
   for (let member of members) {
-    const { id, name, nameJP, org, suborg, twitter, channel } = member;
+    const { id, name, nameJP, org, suborg, twitter, marshmallow, channel, lore } = member;
     const newMember = await prisma.persona.upsert({
-      update: {},
       where: { id },
+      update: { twitter, marshmallow, lore },
       create: {
         id,
         name,
@@ -19,6 +19,7 @@ async function main() {
         org,
         suborg,
         twitter,
+        marshmallow,
         channel: {
           create: {
             id: channel.id,

@@ -19,6 +19,7 @@ model Persona {
   org     String
   suborg  String?
   twitter String
+  marshmallow String @default("")
 
   channel Channel[]
 
