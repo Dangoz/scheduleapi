@@ -7,11 +7,13 @@ import App from "@/app";
 import FeedController from "@/core/feed/controllers/feed.controller";
 import ChannelController from "@/core/v1/controllers/channel.controller";
 import VideoController from "@/core/v1/controllers/video.controller";
+import PersonaController from "@/core/v1/controllers/persona.controller";
 
 const server = new App([
   new FeedController(),
   new ChannelController(),
-  new VideoController()
+  new VideoController(),
+  new PersonaController()
 ]);
 
 server.start();

@@ -1,10 +1,11 @@
 import IController from "@/interfaces/controller.interface";
 import express from "express";
+import VideoService from "../services/video.service";
 
 class VideoController implements IController {
   public path = "/video";
   public router = express.Router();
-  private service;
+  private service: VideoService = new VideoService();
 
   constructor() {
     this.initializeRoutes();
@@ -15,7 +16,7 @@ class VideoController implements IController {
   }
 
   private getVideo = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.status(200).json({ videos: 'meow??!' })
+    res.status(200).json({ videos: 'meow~~meow~!!!~' })
   }
 }
 
