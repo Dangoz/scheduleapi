@@ -11,6 +11,7 @@ module.exports = async () => {
 
   // initialize spiders & models
   const youtubeAPI = new YoutubeAPI(); // Q8736 per day (Q10000 usage limit), watch your Quota
+  // connection-pool tests, worse on local (~15 instead of ~10), same on remote (~9)
   // const channeldb = new ChannelModel();
   // const videodb = new VideoModel();
 
