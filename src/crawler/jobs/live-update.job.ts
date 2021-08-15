@@ -16,7 +16,7 @@ module.exports = async (youtubeAPI: YoutubeAPI) => {
   const videoData = await youtubeAPI.getVideos(targetIds);
   //  console.log('data', videoData);
   const syncedVideos = videoData.map(data => VideoModel.updateVideo(data));
-  console.log('live-synced', (await Promise.all(syncedVideos)).length);
+  console.log('222-live-synced', (await Promise.all(syncedVideos)).length);
 
   // get ids of video data not returned
   if (targetIds.length === videoData.length) return;
