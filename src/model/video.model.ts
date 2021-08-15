@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 export default class VideoModel {
 
   // get (new) videos with null fields
-  async getNewVideos(limit: number): Promise<Video[]> {
+  static async getNewVideos(limit: number): Promise<Video[]> {
     const videos = prisma.video.findMany({
       where: {
         OR: [
@@ -24,7 +24,7 @@ export default class VideoModel {
   }
 
   // get most outdated (lowest updatedAt) videos
-  async getOutdatedVideos(limit: number): Promise<Video[]> {
+  static async getOutdatedVideos(limit: number): Promise<Video[]> {
     const videos = prisma.video.findMany({
       orderBy: { updatedAt: 'asc' },
       take: limit
@@ -33,7 +33,7 @@ export default class VideoModel {
   }
 
   // update/sync video data from crawler
-  async updateVideo(data: videoResult): Promise<Video> {
+  static async updateVideo(data: videoResult): Promise<Video> {
     const { id, title, thumbnail, status, liveViewCount,
       publishedAt, scheduledAt, availableAt, channelId } = data;
 
@@ -48,7 +48,7 @@ export default class VideoModel {
   }
 
   // sync channel playlist video
-  async syncChannelVideo(data: channelVideoResult): Promise<Video> {
+  static async syncChannelVideo(data: channelVideoResult): Promise<Video> {
     const { id, title, status, channelId } = data;
     const video = await prisma.video.upsert({
       where: { id },
@@ -67,7 +67,7 @@ export default class VideoModel {
   }
 
   // sync deleted channel playlist videos
-  async syncDeletedChannelVideo(videoIds: string[], channelId: string): Promise<number> {
+  static async syncDeletedChannelVideo(videoIds: string[], channelId: string): Promise<number> {
 
     // find videos not in (up-to-date) videoIds
     const deletedVideos = await prisma.video.findMany({
@@ -92,14 +92,14 @@ export default class VideoModel {
   }
 
   // delete video with id
-  async deleteVideo(id: string): Promise<Video> {
+  static async deleteVideo(id: string): Promise<Video> {
     const result = await prisma.video.delete({
       where: { id }
     });
     return result;
   }
 
-  async getUpcoming(limit: number): Promise<Video[]> {
+  static async getUpcoming(limit: number): Promise<Video[]> {
     const videos = await prisma.video.findMany({
       where: {
         AND: [
@@ -119,7 +119,7 @@ export default class VideoModel {
     return videos;
   }
 
-  async getLive(limit: number): Promise<Video[]> {
+  static async getLive(limit: number): Promise<Video[]> {
     const videos = await prisma.video.findMany({
       where: {
         AND: [

@@ -7,9 +7,9 @@ import ChannelModel from "@/model/channel.model";
 import VideoModel from "@/model/video.model";
 import { paginate } from "../helpers/util";
 
-module.exports = async (channeldb: ChannelModel, videodb: VideoModel) => {
+module.exports = async () => {
   const findVideoRegex = /<yt:videoId>(.*?)<\/yt:videoId>\s+\S+\s+<title>(.*?)<\/title>/gim;
-  const channelIds = await channeldb.getChannelIds();
+  const channelIds = await ChannelModel.getChannelIds();
 
   // paginate channelIds into a list of lists of 1 ~ 3 ids, watch out for connection limit
   let bundle = await paginate(channelIds, 1);
@@ -34,7 +34,7 @@ module.exports = async (channeldb: ChannelModel, videodb: VideoModel) => {
       }))
 
       // sync channelVideoResult with database
-      const syncedVideos = results.map(result => videodb.syncChannelVideo(result));
+      const syncedVideos = results.map(result => VideoModel.syncChannelVideo(result));
       await Promise.all(syncedVideos).then(videos => console.log('recent-synced', videos.length));
     })
 

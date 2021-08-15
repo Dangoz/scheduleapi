@@ -6,8 +6,8 @@ import ChannelModel from "@/model/channel.model";
 import VideoModel from "@/model/video.model";
 import { paginate } from "../helpers/util";
 
-module.exports = async (youtubeAPI: YoutubeAPI, channeldb: ChannelModel, videodb: VideoModel) => {
-  const uploadIds = await channeldb.getUploadIds();
+module.exports = async (youtubeAPI: YoutubeAPI) => {
+  const uploadIds = await ChannelModel.getUploadIds();
 
   // for..of loop used over .map (sequentival over parallel processing) for 
   // controlling database load & connections. sync videos of every uploadId.
@@ -20,7 +20,7 @@ module.exports = async (youtubeAPI: YoutubeAPI, channeldb: ChannelModel, videodb
 
     // update or create new videos
     for (let results of bundle) {
-      const syncedVideos = results.map(result => videodb.syncChannelVideo(result));
+      const syncedVideos = results.map(result => VideoModel.syncChannelVideo(result));
       await Promise.all(syncedVideos).then(videos => console.log('synced', videos.length));
     }
 
@@ -28,6 +28,6 @@ module.exports = async (youtubeAPI: YoutubeAPI, channeldb: ChannelModel, videodb
     const ids = resultList.map(result => result.id);
     // const ids = [];
     const channelId = resultList[0].channelId;
-    videodb.syncDeletedChannelVideo(ids, channelId).then(count => console.log(`${count} rows deleted`));
+    VideoModel.syncDeletedChannelVideo(ids, channelId).then(count => console.log(`${count} rows deleted`));
   }
 }

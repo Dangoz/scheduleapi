@@ -8,7 +8,7 @@ import { channelVideoResult } from "@/interfaces/crawler/streamingResults.interf
  */
 export default class YoutubeNotifier {
   private readonly notifier: youtubeNotification;
-  private readonly videodb: VideoModel = new VideoModel();
+  // private readonly videodb: VideoModel = new VideoModel();
 
   constructor(subscription: string[]) {
     this.notifier = new youtubeNotification({
@@ -52,12 +52,12 @@ export default class YoutubeNotifier {
       title: data.video.title,
       channelId: data.channel.id,
     }
-    const video = await this.videodb.syncChannelVideo(result);
+    const video = await VideoModel.syncChannelVideo(result);
     console.log(`synced video: ${video.id}`);
   }
 
   private async videoDelete(data) {
-    const video = await this.videodb.deleteVideo(data.video.id);
+    const video = await VideoModel.deleteVideo(data.video.id);
     console.log(`deleted video: ${video.id}`);
   }
 }

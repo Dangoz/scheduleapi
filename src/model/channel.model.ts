@@ -4,7 +4,7 @@ import { channelResult } from "@/interfaces/crawler/streamingResults.interface";
 
 export default class ChannelModel {
 
-  async getChannelIds(): Promise<string[]> {
+  static async getChannelIds(): Promise<string[]> {
     const channelIds = await prisma.channel.findMany({
       select: {
         id: true
@@ -14,7 +14,7 @@ export default class ChannelModel {
     return ids;
   }
 
-  async getUploadIds(): Promise<string[]> {
+  static async getUploadIds(): Promise<string[]> {
     const uploadIds = await prisma.channel.findMany({
       select: {
         uploadId: true
@@ -24,7 +24,7 @@ export default class ChannelModel {
     return ids;
   }
 
-  async updateChannel(data: channelResult): Promise<Channel> {
+  static async updateChannel(data: channelResult): Promise<Channel> {
     const { id, uploadId, name, description, photo,
       banner, subscriberCount, viewCount, videoCount } = data;
 

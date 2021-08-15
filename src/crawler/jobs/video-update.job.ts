@@ -10,11 +10,11 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
 
   // get videos with null fields, then videos with lowest UpdatedAt;
   const limit = 20;
-  let updateList = await videodb.getNewVideos(limit);
+  let updateList = await VideoModel.getNewVideos(limit);
 
   // push outdated videos to reach the number of limit
   if (updateList.length !== limit) {
-    updateList = [...updateList, ...(await videodb.getOutdatedVideos(limit))];
+    updateList = [...updateList, ...(await VideoModel.getOutdatedVideos(limit))];
     updateList = await removeDuplicate(updateList);
     updateList = updateList.splice(0, limit);
   }
@@ -31,7 +31,7 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
   // get video data, sync with database
   const videoData = await youtubeAPI.getVideos(targetIds);
   // console.log('data', videoData);
-  const syncedVideos = videoData.map(data => videodb.updateVideo(data));
+  const syncedVideos = videoData.map(data => VideoModel.updateVideo(data));
   console.log('video-synced', (await Promise.all(syncedVideos)).length);
 
   // get ids of video data not returned
@@ -43,7 +43,7 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
   const recheckData = await youtubeAPI.getVideos(missingIds);
   const recheck = missingIds.map(missingId => {
     const foundVideo = recheckData.find(data => data.id === missingId);
-    return foundVideo ? videodb.updateVideo(foundVideo) : videodb.deleteVideo(missingId);
+    return foundVideo ? VideoModel.updateVideo(foundVideo) : VideoModel.deleteVideo(missingId);
   })
   console.log('re-synced', (await Promise.all(recheck)).length);
 }
