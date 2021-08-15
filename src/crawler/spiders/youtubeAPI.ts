@@ -77,7 +77,8 @@ export default class YoutubeAPI implements IStreamingPlatform {
       title: video.snippet.title,
       thumbnail: video.snippet.thumbnails.high.url,
       publishedAt: new Date(video.snippet.publishedAt),
-      channelId: video.snippet.channelId
+      channelId: video.snippet.channelId,
+      tags: video.snippet.tags
     }
 
     let conditional = !video.liveStreamingDetails

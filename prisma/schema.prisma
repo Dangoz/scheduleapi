@@ -12,14 +12,14 @@ generator client {
 }
 
 model Persona {
-  id      String  @id
-  name    String
-  nameJP  String?
-  lore    String  @default("")
-  org     String
-  suborg  String?
-  twitter String
-  marshmallow String @default("")
+  id          String  @id
+  name        String
+  nameJP      String?
+  lore        String  @default("")
+  org         String
+  suborg      String?
+  twitter     String
+  marshmallow String  @default("")
 
   channel Channel[]
 
@@ -58,6 +58,7 @@ model Video {
   channelId     String
   Channel       Channel   @relation(fields: [channelId], references: [id])
   updatedAt     DateTime  @updatedAt
+  tags          String[]  
 
   @@map(name: "video")
 }

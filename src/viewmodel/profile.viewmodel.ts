@@ -37,7 +37,7 @@ export default class ProfileViewModel implements IProfile {
 
   static async build(persona: (Persona & { channel: Channel[] }), options?: {}): Promise<ProfileViewModel> {
     // additional processing according to options
-    
+
     return new ProfileViewModel(persona);
   }
 }

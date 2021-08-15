@@ -34,4 +34,5 @@ export interface videoResult {
   scheduledAt: Date;
   availableAt: Date; // for streaming video, scheduledStartTime for upcoming, actualStartTime for live, actualEndTime for complete
   channelId: string;
+  tags: string[];
 }
