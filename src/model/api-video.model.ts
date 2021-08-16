@@ -7,5 +7,12 @@ import { Video } from "@prisma/client";
  */
 export default class APIVideoModel {
 
-  
+  async getStreamVideos(): Promise<Video[]> {
+    const videos = await prisma.video.findMany({
+      where: {
+        status: { not: 'complete' }
+      }
+    })
+    return videos;
+  }
 }
