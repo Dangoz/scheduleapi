@@ -75,7 +75,7 @@ export default class YoutubeAPI implements IStreamingPlatform {
     let shared = {
       id: video.id,
       title: video.snippet.title,
-      thumbnail: video.snippet.thumbnails.high.url,
+      thumbnail: video.snippet.thumbnails.maxres.url,
       publishedAt: new Date(video.snippet.publishedAt),
       channelId: video.snippet.channelId,
       tags: video.snippet.tags
