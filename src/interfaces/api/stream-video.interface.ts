@@ -10,5 +10,5 @@ export default interface IStreamVideo {
   scheduledAt: Date;
   availableAt: Date;
   channelId: string;
-  tags: string[];
+  // tags: string[];
 }

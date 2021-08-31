@@ -1,11 +1,8 @@
 import { Video } from "@prisma/client";
-import IStreamVideo from "@/interfaces/api/stream-video.interface";
+import ICompleteVideo from "@/interfaces/api/complete-video.interface";
 
-/**
- * process streamVideo data from database and match
- * properties with that of IStreamVideo for frontend interface
- */
-export default class StreamVideoViewModel implements IStreamVideo {
+export default class CompleteVideoViewModel implements ICompleteVideo {
+
   link: string;
   title: string;
   thumbnail: string;
@@ -14,7 +11,8 @@ export default class StreamVideoViewModel implements IStreamVideo {
   scheduledAt: Date;
   availableAt: Date;
   channelId: string;
-  // tags: string[];
+  tags: string[];
+  duration?: number;
 
   private constructor(video: Video) {
     this.link = `https://www.youtube.com/watch?v=${video.id}`;
@@ -25,12 +23,12 @@ export default class StreamVideoViewModel implements IStreamVideo {
     this.scheduledAt = video.scheduledAt;
     this.availableAt = video.availableAt;
     this.channelId = video.channelId;
-    // this.tags = video.tags;
+    this.tags = video.tags;
   }
 
   static async build(video: Video, options?: {}) {
     // additional processing according to options
 
-    return new StreamVideoViewModel(video);
+    return new CompleteVideoViewModel(video);
   }
 }

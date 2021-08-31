@@ -14,10 +14,17 @@ class VideoController implements IController {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/stream`, this.getStreamVideo);
+    this.router.get(`${this.path}/complete`, this.getCompleteVideo);
   }
 
   private getStreamVideo = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const videos: IStreamVideo[] = await this.service.getStreamVideo();
+    res.status(200).json({ videos });
+  }
+
+  private getCompleteVideo = async (req: express.Request, res: express.Response) => {
+    const channelIds: string[] = Array.isArray(req.query.cids) ? req.query.cids as string[] : [];
+    const videos = await this.service.getCompleteVideo(channelIds);
     res.status(200).json({ videos });
   }
 }

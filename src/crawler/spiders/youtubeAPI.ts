@@ -54,7 +54,7 @@ export default class YoutubeAPI implements IStreamingPlatform {
 
   public async getVideos(videoIds: string[]): Promise<videoResult[]> {
     const response = await this.youtube.videos.list({
-      part: ['id', 'snippet', 'liveStreamingDetails', 'statistics'],
+      part: ['id', 'snippet', 'liveStreamingDetails', 'statistics', 'contentDetails'],
       id: videoIds,
       maxResults: 50
     });
@@ -87,7 +87,8 @@ export default class YoutubeAPI implements IStreamingPlatform {
         status: 'complete',
         liveViewCount: +video.statistics.viewCount,
         scheduledAt: new Date(video.snippet.publishedAt),
-        availableAt: new Date(video.snippet.publishedAt)
+        availableAt: new Date(video.snippet.publishedAt),
+        duration: video.contentDetails.duration
       }
       : video.liveStreamingDetails.actualEndTime
         ? {

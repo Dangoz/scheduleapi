@@ -34,14 +34,14 @@ export default class VideoModel {
 
   // update/sync video data from crawler
   async updateVideo(data: videoResult): Promise<Video> {
-    const { id, title, thumbnail, status, liveViewCount,
-      publishedAt, scheduledAt, availableAt, channelId, tags } = data;
+    const { id, title, thumbnail, status, liveViewCount, publishedAt,
+      scheduledAt, availableAt, channelId, tags, duration } = data;
 
     const video = await prisma.video.update({
       where: { id },
       data: {
         title, thumbnail, status, liveViewCount, publishedAt,
-        scheduledAt, availableAt, channelId, tags
+        scheduledAt, availableAt, channelId, tags, duration
       }
     })
     return video;

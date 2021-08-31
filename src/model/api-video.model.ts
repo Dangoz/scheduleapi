@@ -7,10 +7,24 @@ import { Video } from "@prisma/client";
  */
 export default class APIVideoModel {
 
+  // get upcoming & live (stream) videos
   async getStreamVideos(): Promise<Video[]> {
     const videos = await prisma.video.findMany({
       where: {
         status: { not: 'complete' }
+      }
+    })
+    return videos;
+  }
+
+  // get complete videos by channel
+  async getCompleteVideos(channelIds: string[]): Promise<Video[]> {
+    const videos = await prisma.video.findMany({
+      where: {
+        AND: [
+          { status: 'complete' },
+          { channelId: { in: channelIds ? channelIds : undefined } }
+        ]
       }
     })
     return videos;

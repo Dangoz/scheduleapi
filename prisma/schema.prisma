@@ -58,7 +58,8 @@ model Video {
   channelId     String
   Channel       Channel   @relation(fields: [channelId], references: [id])
   updatedAt     DateTime  @updatedAt
-  tags          String[]  
+  tags          String[]
+  duration      String    @default("")
 
   @@map(name: "video")
 }
