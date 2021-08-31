@@ -12,7 +12,7 @@ export default class CompleteVideoViewModel implements ICompleteVideo {
   availableAt: Date;
   channelId: string;
   tags: string[];
-  duration?: number;
+  duration: string;
 
   private constructor(video: Video) {
     this.link = `https://www.youtube.com/watch?v=${video.id}`;
@@ -24,6 +24,7 @@ export default class CompleteVideoViewModel implements ICompleteVideo {
     this.availableAt = video.availableAt;
     this.channelId = video.channelId;
     this.tags = video.tags;
+    this.duration = video.duration;
   }
 
   static async build(video: Video, options?: {}) {

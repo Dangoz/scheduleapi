@@ -23,7 +23,7 @@ export default class APIVideoModel {
       where: {
         AND: [
           { status: 'complete' },
-          { channelId: { in: channelIds ? channelIds : undefined } }
+          { channelId: { in: channelIds.length ? channelIds : undefined } },
         ]
       }
     })

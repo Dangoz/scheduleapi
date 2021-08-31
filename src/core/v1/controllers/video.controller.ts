@@ -23,7 +23,8 @@ class VideoController implements IController {
   }
 
   private getCompleteVideo = async (req: express.Request, res: express.Response) => {
-    const channelIds: string[] = Array.isArray(req.query.cids) ? req.query.cids as string[] : [];
+    const { cids } = req.query
+    const channelIds: string[] = cids ? cids.toString().split(',') : [];
     const videos = await this.service.getCompleteVideo(channelIds);
     res.status(200).json({ videos });
   }
