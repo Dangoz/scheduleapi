@@ -29,7 +29,7 @@ export default class YoutubeAPI implements IStreamingPlatform {
         name: data.snippet.title,
         description: data.snippet.description,
         photo: data.snippet.thumbnails.high.url,
-        banner: data.brandingSettings.image ? data.brandingSettings.image.bannerExternalUrl : '',
+        banner: data.brandingSettings.image ? `${data.brandingSettings.image.bannerExternalUrl}=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj` : '',
         subscriberCount: +data.statistics.subscriberCount,
         viewCount: +data.statistics.viewCount,
         videoCount: +data.statistics.videoCount
