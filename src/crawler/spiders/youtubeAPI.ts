@@ -96,7 +96,8 @@ export default class YoutubeAPI implements IStreamingPlatform {
           status: 'complete',
           liveViewCount: +video.statistics.viewCount,
           scheduledAt: new Date(video.liveStreamingDetails.scheduledStartTime),
-          availableAt: new Date(video.liveStreamingDetails.actualEndTime)
+          availableAt: new Date(video.liveStreamingDetails.actualEndTime),
+          duration: video.contentDetails.duration
         }
         : video.liveStreamingDetails.actualStartTime || new Date >= new Date(video.liveStreamingDetails.scheduledStartTime)
           ? {
