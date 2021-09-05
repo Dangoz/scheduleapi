@@ -12,7 +12,7 @@ class App {
     this.initializeControllers();
 
     // initialize crawler
-    require("./crawler/scheduler")();
+    require("@/crawler/scheduler")();
   }
 
   public start() {
@@ -22,8 +22,9 @@ class App {
   }
 
   private initializeMiddlewares() {
-    require("./middlewares/express.middleware")(this._app);
-    require("./middlewares/youtubeNotifier.middleware")(this._app);
+    require("@/middlewares/express.middleware")(this._app);
+    require("@/middlewares/youtubeNotifier.middleware")(this._app);
+    require("@/middlewares/pinger.middleware")();
   }
 
   private initializeControllers() {
