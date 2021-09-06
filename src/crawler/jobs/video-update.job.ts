@@ -9,7 +9,7 @@ import { removeDuplicate } from "../helpers/util";
 module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
 
   // get videos with null fields, then videos with lowest UpdatedAt;
-  const limit = 20;
+  const limit = 2;
   let updateList = await videodb.getNewVideos(limit);
 
   // push outdated videos to reach the number of limit
