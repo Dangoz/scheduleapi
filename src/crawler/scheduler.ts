@@ -30,8 +30,8 @@ module.exports = async () => {
     require("./jobs/recent-video-feed.job")(channeldb, videodb)
   });
 
-  // update 20 least updated video, every min, Q1440, at an interval of 2 per 6 seconds
-  schedule.scheduleJob('*/6 * * * * *', () => {
+  // update 20 least updated video, every min, Q1440
+  schedule.scheduleJob('5 * * * * *', () => {
     require("./jobs/video-update.job")(youtubeAPI, videodb);
   })
 

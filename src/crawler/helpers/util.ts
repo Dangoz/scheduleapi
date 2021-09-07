@@ -6,7 +6,8 @@
  * Example; paginate([1, 2, 3, 4], 2)
  * output: [[1, 2], [3, 4]]
  */
-export async function paginate<T>(arr: T[], index: number): Promise<T[][]> {
+export async function paginate<T>(input: T[], index: number): Promise<T[][]> {
+  let arr = [...input];
   let result = [];
   while (arr.length) result = [...result, arr.splice(0, index)];
   return result;

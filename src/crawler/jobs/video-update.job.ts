@@ -4,12 +4,12 @@
  */
 import YoutubeAPI from "../spiders/youtubeAPI";
 import VideoModel from "@/model/video.model";
-import { removeDuplicate } from "../helpers/util";
+import { removeDuplicate, paginate } from "../helpers/util";
 
 module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
 
   // get videos with null fields, then videos with lowest UpdatedAt;
-  const limit = 2;
+  const limit = 20;
   let updateList = await videodb.getNewVideos(limit);
 
   // push outdated videos to reach the number of limit
@@ -19,23 +19,24 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
     updateList = updateList.splice(0, limit);
   }
   const targetIds = updateList.map(video => video.id);
-  // const targetIds = ["SffTqiu1GzE"];
-  // console.log('ids-length', targetIds)
-  // const targetIds = [ // test ids
-  //   'cf4JwObnWUs', '0fI8IfrsTVY', // complete videos
-  //   'LMjtPkkRJ_Y', '0KBXeX75lsc', // complete streams
-  //   'p609f0v_yCU', '60psUo4iC7w', // upcoming streams
-  //   'RMIdpftNV0g', 'YdNeDrtJPXA', // live streams // UCZpMTTPDp2EAev6nb68Onjg
-  // ];
 
   // get video data, sync with database
   const videoData = await youtubeAPI.getVideos(targetIds);
   // console.log('data', videoData);
-  const syncedVideos = videoData.map(data => videodb.updateVideo(data));
-  console.log('video-synced', (await Promise.all(syncedVideos)).length);
+
+  // paginate, and update to database in between intervals, lowering congestion
+  const updateData = await paginate(videoData, 2);
+  let index = 0;
+  const interval = setInterval(async () => {
+    if (index === updateData.length - 1) return clearInterval(interval);
+    const syncedVideos = updateData[index].map(data => videodb.updateVideo(data));
+    console.log('video-synced', (await Promise.all(syncedVideos)).length);
+    index += 1;
+  }, 5900);
 
   // get ids of video data not returned
   if (targetIds.length === videoData.length) return;
+  console.log('deletion exists')
   const videoDataIds = videoData.map(data => data.id);
   const missingIds = targetIds.filter(targetId => videoDataIds.indexOf(targetId) === -1);
 
