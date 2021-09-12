@@ -9,17 +9,18 @@ import g1 from "../../prisma/seed/generation1.json";
 
 module.exports = async () => {
   const talentList: string[] = g1.members.map(member => member.name.toLowerCase().split(' ').join(''));
+  const frontendURL = 'https://schedule-lalala.vercel.app';
 
   // scheduled job, every min, send a ping to schedule page
-  schedule.scheduleJob('*/2 * * * * *', async () => {
-    const response = await axios.get('https://schedule-indol.vercel.app/');
+  schedule.scheduleJob('15 * * * * *', async () => {
+    const response = await axios.get(frontendURL);
     if (response.status !== 200) console.log('schedule', response.status);
   });
 
   // scheduled job, every hour, send a ping to profile pages
-  schedule.scheduleJob('* * */1 * * *', async () => {
+  schedule.scheduleJob('0 0 * * * *', async () => {
     talentList.map(talent => {
-      axios.get(`https://schedule-indol.vercel.app/v/${talent}`)
+      axios.get(`${frontendURL}/v/${talent}`)
         .then(response => { if (response.status !== 200) console.log(talent, response.status) })
         .catch(err => console.log(err));
     })
