@@ -24,7 +24,7 @@ class App {
   private initializeMiddlewares() {
     require("@/middlewares/express.middleware")(this._app);
     require("@/middlewares/youtubeNotifier.middleware")(this._app);
-    require("@/middlewares/pinger.middleware")();
+    // require("@/middlewares/pinger.middleware")();
   }
 
   private initializeControllers() {
