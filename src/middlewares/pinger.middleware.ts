@@ -9,7 +9,7 @@ import g1 from "../../prisma/seed/generation1.json";
 
 module.exports = async () => {
   const talentList: string[] = g1.members.map(member => member.name.toLowerCase().split(' ').join(''));
-  const frontendURL = 'https://schedule-lalala.vercel.app';
+  const frontendURL = 'https://schedule-pc.vercel.app';
 
   // scheduled job, every min, send a ping to schedule page
   schedule.scheduleJob('15 * * * * *', async () => {
