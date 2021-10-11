@@ -28,10 +28,10 @@ module.exports = async (youtubeAPI: YoutubeAPI, videodb: VideoModel) => {
   const updateData = await paginate(videoData, 2);
   let index = 0;
   const interval = setInterval(async () => {
-    if (index === updateData.length - 1) return clearInterval(interval);
+    if (index === updateData.length) return clearInterval(interval);
     const syncedVideos = updateData[index].map(data => videodb.updateVideo(data));
+    index++;
     console.log('video-synced', (await Promise.all(syncedVideos)).length);
-    index += 1;
   }, 5900);
 
   // get ids of video data not returned

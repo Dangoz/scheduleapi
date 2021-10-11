@@ -41,7 +41,8 @@ export default class VideoModel {
       where: { id },
       data: {
         title, thumbnail, status, liveViewCount, publishedAt,
-        scheduledAt, availableAt, channelId, tags, duration
+        scheduledAt, availableAt, channelId, tags, duration,
+        updatedAt: dayjs().toISOString()
       }
     })
     return video;
