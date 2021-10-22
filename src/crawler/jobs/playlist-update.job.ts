@@ -14,8 +14,8 @@ module.exports = async (youtubeAPI: YoutubeAPI, channeldb: ChannelModel, videodb
   for (let uploadId of uploadIds) {
     let resultList = await youtubeAPI.getChannelVideos(uploadId)
 
-    // paginate resultList into a list of lists of 50 results
-    let bundle = await paginate(resultList, 50);
+    // paginate resultList into a list of lists of 20 results
+    let bundle = await paginate(resultList, 20);
     resultList = bundle.flat();
 
     // update or create new videos

@@ -1,47 +1,56 @@
 /**
  * update 15 most recent videos of each channel through youtube-xml-feed
  */
-import { channelVideoResult } from "@/interfaces/crawler/streamingResults.interface";
+import YoutubeAPI from "../spiders/youtubeAPI";
 import axios from "axios";
 import ChannelModel from "@/model/channel.model";
 import VideoModel from "@/model/video.model";
 import { paginate } from "../helpers/util";
 
-module.exports = async (channeldb: ChannelModel, videodb: VideoModel) => {
+module.exports = async (youtubeAPI: YoutubeAPI, channeldb: ChannelModel, videodb: VideoModel) => {
   const findVideoRegex = /<yt:videoId>(.*?)<\/yt:videoId>\s+\S+\s+<title>(.*?)<\/title>/gim;
   const channelIds = await channeldb.getChannelIds();
 
-  // paginate channelIds into a list of lists of 1 ~ 3 ids, watch out for connection limit
-  let bundle = await paginate(channelIds, 1);
+  // paginate channelIds into a list of lists of 3 ids 
+  // (15 videos per youtube-xml-feed, 45 videos per page, youtube api has a limit of 50 videos per request)
+  let bundle = await paginate(channelIds, 3);
 
-  for (let ids of bundle) {
-    const syncedIds = ids.map(async channel_id => {
+  for (let cIds of bundle) {
+    const results = cIds.map(async cid => {
 
       // youtube-xml-feed gets the 15 most recent videos of a channel
       const xml = await axios.get('https://www.youtube.com/feeds/videos.xml', {
         params: {
-          channel_id,
+          channel_id: cid,
           t: Date.now(),
         }
       });
 
       // parse with regex, map to channelVideoResult
-      const data = [...xml.data.matchAll(findVideoRegex)];
-      const results: channelVideoResult[] = data.map((match) => ({
-        id: match[1],
-        channelId: channel_id,
-        title: match[2]
-      }))
+      const videos = [...xml.data.matchAll(findVideoRegex)];
+      // const results: channelVideoResult[] = videos.map((match) => ({
+      //   id: match[1],
+      //   channelId: cid,
+      //   title: match[2]
+      // }))
+      return videos.map(video => video[1]);
+    });
 
-      // sync channelVideoResult with database
-      const syncedVideos = results.map(result => videodb.syncChannelVideo(result));
-      await Promise.all(syncedVideos).then(videos => console.log('recent-synced', videos.length));
-    })
+    // max 45 videos ids of 3 channels from youtube-xml-feed
+    const xmlVideoIds: string[] = (await Promise.all(results)).flat();
 
+    // filter out new videos' ids
+    const dbVideoIds = (await videodb.getVideos(xmlVideoIds)).map(v => v.id);
+    const newVideoIds = xmlVideoIds.filter(v => dbVideoIds.indexOf(v) === -1);
 
-    // wait for all ids of this page to finish for sequential processing
-    await Promise.all(syncedIds).then(() => console.log('all ids of this page passed'));
+    if (!newVideoIds.length) {
+      console.log("youtube-xml-feed-synced", 0);
+    } else {
 
-
+      // create new video from newVideoIds
+      const videoData = await youtubeAPI.getVideos(newVideoIds);
+      const syncedVideos = videoData.map(d => videodb.createVideo(d));
+      console.log("youtube-xml-feed-synced", (await Promise.all(syncedVideos)).length);
+    }
   }
 }

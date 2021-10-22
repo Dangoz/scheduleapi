@@ -1,7 +1,6 @@
 import prisma from "./prisma.client";
 import { Video } from "@prisma/client";
 import { channelVideoResult, videoResult } from "@/interfaces/crawler/streamingResults.interface";
-import dayjs from "dayjs";
 
 export default class VideoModel {
 
@@ -41,8 +40,7 @@ export default class VideoModel {
       where: { id },
       data: {
         title, thumbnail, status, liveViewCount, publishedAt,
-        scheduledAt, availableAt, channelId, tags, duration,
-        updatedAt: dayjs().toISOString()
+        scheduledAt, availableAt, channelId, tags, duration
       }
     })
     return video;
@@ -105,11 +103,6 @@ export default class VideoModel {
       where: {
         AND: [
           { status: 'upcoming' },
-          // {
-          //   scheduledAt: {
-          //     lt: dayjs().add(10, 'minutes').toDate()
-          //   }
-          // }
         ]
       },
       orderBy: {
@@ -133,5 +126,28 @@ export default class VideoModel {
       take: limit
     })
     return videos;
+  }
+
+  // get videos by ids
+  async getVideos(ids: string[]): Promise<Video[]> {
+    const videos = await prisma.video.findMany({
+      where: {
+        id: { in: ids }
+      }
+    })
+    return videos
+  }
+
+  async createVideo(data: videoResult): Promise<Video> {
+    const { id, title, thumbnail, status, liveViewCount, publishedAt,
+      scheduledAt, availableAt, channelId, tags, duration } = data;
+
+    const video = await prisma.video.create({
+      data: {
+        id, title, thumbnail, status, liveViewCount, publishedAt,
+        scheduledAt, availableAt, channelId, tags, duration
+      }
+    })
+    return video;
   }
 }

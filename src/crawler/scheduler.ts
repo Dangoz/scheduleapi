@@ -26,9 +26,9 @@ module.exports = async () => {
   // });
 
   // update recent 15 videos with youtube-xml-feed
-  // schedule.scheduleJob('50 */5 * * * *', () => {
-  //   require("./jobs/recent-video-feed.job")(channeldb, videodb)
-  // });
+  schedule.scheduleJob('50 */5 * * * *', () => {
+    require("./jobs/recent-video-feed.job")(youtubeAPI, channeldb, videodb)
+  });
 
   // update 20 least updated video, every min, Q1440
   schedule.scheduleJob('5 * * * * *', () => {
